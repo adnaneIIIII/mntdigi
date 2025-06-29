@@ -33,7 +33,7 @@ export default function PortfolioSection() {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Our Work</h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">Take a look at some of the brands we've elevated</p>
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">Take a look at some of the brands we&apos;ve elevated</p>
         </div>
 
         {/* Portfolio Grid */}

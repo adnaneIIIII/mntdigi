@@ -1,7 +1,7 @@
 
-import Container from "@/components/container";
 import { Button } from "@/components/ui/button";
-import Wrapper from "@/components/wrapper";
+
+
 import { ArrowLeftIcon } from "lucide-react";
 import Link from 'next/link';
 
@@ -9,8 +9,7 @@ import Link from 'next/link';
 const NotFoundPage = () => {
     return (
         <main className="relative flex flex-col items-center justify-center px-4 h-dvh">
-            <Wrapper>
-                <Container className="flex flex-col items-center justify-center mx-auto py-16">
+          
                     <div className="flex items-center justify-center h-full flex-col">
                         <span className="text-sm px-3.5 py-1 rounded-md bg-gradient-to-br from-sky-400 to-blue-600 text-neutral-50 custom-shadow">
                             404
@@ -28,8 +27,7 @@ const NotFoundPage = () => {
                             </Button>
                         </Link>
                     </div>
-                </Container>
-            </Wrapper>
+
         </main>
     )
 };
