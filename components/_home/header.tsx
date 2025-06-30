@@ -30,7 +30,7 @@ export default function Header() {
               src={"/Mntdigital-b.png"}
               width={120}
               height={100}
-              alt="IPTV service offering high-quality streaming"
+              alt="mntdigital"
               className="h-14 w-28 relative"
             />
           </Link>
