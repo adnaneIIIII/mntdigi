@@ -91,7 +91,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
           <div className="flex justify-between items-center py-4">
             <Link href={"/"}>
               <Image
-                src={"/mntdigitals-b.png"}
+                src={"/Mntdigitals-b.png"}
                 width={120}
                 height={100}
                 alt="mntdigitals"

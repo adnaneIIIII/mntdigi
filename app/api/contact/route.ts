@@ -45,7 +45,7 @@ const date = new Date();
     <div class="max-w-xl mx-auto my-10 bg-white shadow-md rounded-lg overflow-hidden">
       <div class="bg-green-600 text-white text-center py-6 px-4">
         <h1 class="text-2xl font-bold">✅ Order Confirmed!</h1>
-        <p class="text-sm mt-1">Thank you for choosing our IPTV service.</p>
+        <p class="text-sm mt-1">Thank you for choosing our service.</p>
       </div>
 
       <div class="p-6">
@@ -56,12 +56,11 @@ const date = new Date();
         </p>
 
         <div class="bg-gray-50 border rounded-md p-4 text-sm mb-4">
-          <p><strong>💳 Payment Method:</strong> PayPal</p>
           <p><strong>📅 Order Date:</strong> ${date.toDateString()}</p>
         </div>
 
         <p class="text-sm mb-4">
-          ⏱️ Your service will be activated within <strong>10-30 minutes</strong>.  
+          ⏱️ Your subscription will be activated within <strong>10-30 minutes</strong>.  
           You'll receive your details via email shortly.
         </p>
 
@@ -70,7 +69,7 @@ const date = new Date();
         </p>
 
         <a
-          href="mailto:support@youriptv.com"
+          href="mailto:support@mntdigital.com"
           class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-5 py-2 rounded-md mt-2"
         >
           Contact Support
@@ -78,7 +77,7 @@ const date = new Date();
       </div>
 
       <div class="bg-gray-100 text-center text-xs text-gray-500 py-4 px-6">
-        This is an automated confirmation. If you did not place this order, please contact us immediately.<br />
+        This is an automated confirmation. If you did not place this order, please contact us immediately, or just reply to this email.<br />
         &copy; 2025 MNT Digital. All rights reserved.
       </div>
     </div>
@@ -88,25 +87,17 @@ const date = new Date();
 
     resend.emails.send({
       from: "support@mntdigital.com",
-      to: "support@mntdigital.com",
-      
+      to: "mntdigital.com@gmail.com",
       subject: "Order has been submited!",
       html: htmlContent,
     });
-       resend.emails.send({
-      from: "support@mntdigital.com",
-      to: "support@mntdigital.com",
-      
-      subject: "Order has been submited!",
-      html: htmlContent,
-    });
+     
 
     await resend.emails.send({
       from: "support@mntdigital.com", // Use your verified domain
       to: email,   // Your receiving email
       subject: "Order confirmation! Thank you for choosing us.",
       html: Content,
-
     });
 
     return NextResponse.json({ success: true, contact });
