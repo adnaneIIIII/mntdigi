@@ -23,7 +23,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const [product, setProduct] = useState<Product[]>([]);
   useEffect(() => {
     fetchProduct();
-  }, []);
+  },[]);
 
   const fetchProduct = async () => {
     const res = (await getSingleProduct(params.id)) as Product[];
