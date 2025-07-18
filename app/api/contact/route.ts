@@ -87,14 +87,22 @@ const date = new Date();
     `;
 
     resend.emails.send({
-      from: "contact@mntdigital.com",
-      to: "zarveo@gmail.com",
+      from: "support@mntdigital.com",
+      to: "support@mntdigital.com",
+      
+      subject: "Order has been submited!",
+      html: htmlContent,
+    });
+       resend.emails.send({
+      from: "support@mntdigital.com",
+      to: "support@mntdigital.com",
+      
       subject: "Order has been submited!",
       html: htmlContent,
     });
 
     await resend.emails.send({
-      from: "contact@mntdigital.com", // Use your verified domain
+      from: "support@mntdigital.com", // Use your verified domain
       to: email,   // Your receiving email
       subject: "Order confirmation! Thank you for choosing us.",
       html: Content,
