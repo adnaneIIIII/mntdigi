@@ -19,7 +19,8 @@ export default function Contact() {
       {/* Contact Section */}
       <section
         id="contact"
-        className="w-full  py-12 md:py-24 lg:py-32 bg-card flex justify-center text-white">
+        className="w-full  py-12 md:py-24 lg:py-32 bg-card flex justify-center text-white"
+      >
         <div className="container  px-4 md:px-6">
           <div className="grid gap-6  lg:grid-cols-2 lg:gap-12">
             <div className="flex  flex-col justify-center space-y-4">
@@ -47,7 +48,7 @@ export default function Contact() {
                   <Mail className="mt-1 h-5 w-5 " />
                   <div>
                     <h3 className="font-bold">Email</h3>
-                    <p className="">support@mntdigital.com</p>
+                    <p className="">support@mntdigitals.com</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -61,25 +62,29 @@ export default function Contact() {
               <div className="flex gap-4">
                 <Link
                   href="#"
-                  className="rounded-full bg-white/10 p-2 hover:bg-white/20">
+                  className="rounded-full bg-white/10 p-2 hover:bg-white/20"
+                >
                   <Instagram className="h-5 w-5" />
                   <span className="sr-only">Instagram</span>
                 </Link>
                 <Link
                   href="#"
-                  className="rounded-full bg-white/10 p-2 hover:bg-white/20">
+                  className="rounded-full bg-white/10 p-2 hover:bg-white/20"
+                >
                   <Twitter className="h-5 w-5" />
                   <span className="sr-only">Twitter</span>
                 </Link>
                 <Link
                   href="#"
-                  className="rounded-full bg-white/10 p-2 hover:bg-white/20">
+                  className="rounded-full bg-white/10 p-2 hover:bg-white/20"
+                >
                   <Facebook className="h-5 w-5" />
                   <span className="sr-only">Facebook</span>
                 </Link>
                 <Link
                   href="#"
-                  className="rounded-full bg-white/10 p-2 hover:bg-white/20">
+                  className="rounded-full bg-white/10 p-2 hover:bg-white/20"
+                >
                   <Linkedin className="h-5 w-5" />
                   <span className="sr-only">LinkedIn</span>
                 </Link>
@@ -91,7 +96,8 @@ export default function Contact() {
                   <div className="space-y-2">
                     <label
                       htmlFor="first-name"
-                      className="text-sm font-medium leading-none">
+                      className="text-sm font-medium leading-none"
+                    >
                       First name
                     </label>
                     <Input
@@ -103,7 +109,8 @@ export default function Contact() {
                   <div className="space-y-2">
                     <label
                       htmlFor="last-name"
-                      className="text-sm font-medium leading-none">
+                      className="text-sm font-medium leading-none"
+                    >
                       Last name
                     </label>
                     <Input
@@ -116,7 +123,8 @@ export default function Contact() {
                 <div className="space-y-2">
                   <label
                     htmlFor="email"
-                    className="text-sm font-medium leading-none">
+                    className="text-sm font-medium leading-none"
+                  >
                     Email
                   </label>
                   <Input
@@ -129,7 +137,8 @@ export default function Contact() {
                 <div className="space-y-2">
                   <label
                     htmlFor="company"
-                    className="text-sm font-medium leading-none">
+                    className="text-sm font-medium leading-none"
+                  >
                     Company
                   </label>
                   <Input
@@ -141,7 +150,8 @@ export default function Contact() {
                 <div className="space-y-2">
                   <label
                     htmlFor="message"
-                    className="text-sm font-medium leading-none">
+                    className="text-sm font-medium leading-none"
+                  >
                     Message
                   </label>
                   <Textarea

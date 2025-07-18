@@ -27,10 +27,10 @@ export default function Header() {
         <div className="flex justify-between items-center py-4">
           <Link href={"/home"}>
             <Image
-              src={"/Mntdigital-b.png"}
+              src={"/mntdigitals-b.png"}
               width={120}
               height={100}
-              alt="mntdigital"
+              alt="mntdigitals"
               className="h-14 w-28 relative"
             />
           </Link>
@@ -46,7 +46,7 @@ export default function Header() {
 
             <div className="flex items-center">
               <div className="flex items-center justify-center w-6 h-6 rounded-full bg-green-500 text-white">
-              <span className="text-xs font-bold">2</span>
+                <span className="text-xs font-bold">2</span>
               </div>
               <span className="ml-2 text-sm font-medium text-gray-600">
                 Details

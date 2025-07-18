@@ -10,7 +10,7 @@ const geistSans = DM_Sans({
 });
 
 export const metadata = generateMetadata({
-  email: "support@mntdigital.com",
+  email: "support@mntdigitals.com",
   telephone: "+17822221472",
 });
 
@@ -32,7 +32,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          
           {children}
         </ThemeProvider>
       </body>

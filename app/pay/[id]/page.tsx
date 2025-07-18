@@ -23,7 +23,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const [product, setProduct] = useState<Product[]>([]);
   useEffect(() => {
     fetchProduct();
-  },[]);
+  }, []);
 
   const fetchProduct = async () => {
     const res = (await getSingleProduct(params.id)) as Product[];
@@ -91,10 +91,10 @@ export default function ProductPage({ params }: { params: { id: string } }) {
           <div className="flex justify-between items-center py-4">
             <Link href={"/"}>
               <Image
-                src={"/Mntdigital-b.png"}
+                src={"/mntdigitals-b.png"}
                 width={120}
                 height={100}
-                alt="mntdigital"
+                alt="mntdigitals"
                 className="h-14 w-28 relative"
               />
             </Link>

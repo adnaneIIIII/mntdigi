@@ -15,7 +15,6 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
 export default function ProductPage({ params }: { params: { id: string } }) {
@@ -51,6 +50,15 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     productname: "",
     country: "",
   });
+
+  useEffect(() => {
+    if (product[0]?.name) {
+      setFormData((prev) => ({
+        ...prev,
+        productname: product[0].name,
+      }));
+    }
+  }, [product]);
 
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState("");
@@ -94,7 +102,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     <>
       <Head>
         <title>
-          MntDigital | Creative Content & Social Media Marketing Agency
+          mntdigitals | Creative Content & Social Media Marketing Agency
         </title>
       </Head>
       {/* Header */}
@@ -155,15 +163,13 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                       className="flex-1 text-gray-900 block w-full rounded-none rounded-r-md py-2 px-3 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                     />
                     <Input
-                      type="hidden"
+                      type="text"
                       name="productname"
-                      value={product[0]?.name}
-                      defaultValue={product[0]?.name.toString()}
+                      value={formData.productname}
                       onChange={handleChange}
                       placeholder="Productname"
-                      className="flex-1 text-gray-900 block w-full rounded-none rounded-r-md py-2 px-3 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                      className="flex-1 hidden text-gray-900  w-full rounded-none rounded-r-md py-2 px-3 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                     />
-
                     {/* COUNTRY SELECT DROPDOWN */}
                     <Label className="text-gray-900">Country</Label>
                     <Select

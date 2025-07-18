@@ -14,7 +14,7 @@ function Navbar() {
       <div className="flex items-center justify-between h-full mx-auto md:max-w-screen-xl">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <Image src="/Mntdigital-w.png" alt="logo" width={100} height={80} />
+          <Image src="/mntdigitals-w.png" alt="logo" width={100} height={80} />
         </Link>
 
         {/* Desktop Nav */}
