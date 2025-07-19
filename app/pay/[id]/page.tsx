@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { getSingleProduct } from "@/services";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function ProductPage({ params }: { params: { id: string } }) {
   type Product = {
@@ -54,6 +55,10 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
   let id: number = 0;
 
+
+  const router = useRouter();
+
+
   if (params.id === "cma3zclf8igzf07jxehynv8d3") {
     id = 2;
   } else if (params.id === "cma3z9xwrc42h07lfsy8k3u61") {
@@ -62,12 +67,14 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     id = 0;
   }
 
-  const handlePaypalApprove = (data: any, actions: any) => {
-    return actions.order.capture().then(function (details: any) {
-      console.log("Transaction completed by " + details.payer.name.given_name);
-      // You can add your logic here after successful payment
-    });
-  };
+ const handlePaypalApprove = (data: any, actions: any) => {
+  return actions.order.capture().then(function (details: any) {
+    console.log("Transaction completed by " + details.payer.name.given_name);
+    // Redirect after successful payment
+    router.push("/thank-you");
+  });
+};
+
 
   const createPaypalOrder = (data: any, actions: any) => {
     return actions.order.create({
