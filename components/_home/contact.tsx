@@ -39,8 +39,7 @@ export default function Contact() {
                   <div>
                     <h3 className="font-bold">Address</h3>
                     <p className="">
-                      Bureau 9, 2ème étage, Immeuble Al Youbia, Ave Allal Ben
-                      Abdellah, Fes 30000, Morocco
+                     1412 Broadway 21st Floor, New York, NY 10018, United States
                     </p>
                   </div>
                 </div>
