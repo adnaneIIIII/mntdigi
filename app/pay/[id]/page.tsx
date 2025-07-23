@@ -7,6 +7,8 @@ import { getSingleProduct } from "@/services";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export default function ProductPage({ params }: { params: { id: string } }) {
   type Product = {
@@ -21,7 +23,15 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     status: string;
     image: { url: string }[];
   };
+  
   const [product, setProduct] = useState<Product[]>([]);
+  
+  // Coupon system state
+  const [couponCode, setCouponCode] = useState("");
+  const [appliedCoupon, setAppliedCoupon] = useState("");
+  const [couponMessage, setCouponMessage] = useState("");
+  const [discount, setDiscount] = useState(0);
+  
   useEffect(() => {
     fetchProduct();
   },[]);
@@ -31,6 +41,48 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     setProduct(res);
     console.log(res);
   };
+
+  // Coupon validation function
+  const applyCoupon = () => {
+    const trimmedCode = couponCode.trim().toUpperCase();
+    
+    if (trimmedCode === "10TOPS") {
+      if (appliedCoupon === "10TOPS") {
+        setCouponMessage("Coupon already applied");
+        return;
+      }
+      setAppliedCoupon("10TOPS");
+      setDiscount(0.1); // 10% discount
+      setCouponMessage("Coupon applied! 10% discount");
+      setCouponCode("");
+    } else if (trimmedCode === "15TOPS") {
+      if (appliedCoupon === "15TOPS") {
+        setCouponMessage("Coupon already applied");
+        return;
+      }
+      setAppliedCoupon("15TOPS");
+      setDiscount(0.15); // 15% discount
+      setCouponMessage("Coupon applied! 15% discount");
+      setCouponCode("");
+    } else {
+      setCouponMessage("Invalid coupon code");
+      setAppliedCoupon("");
+      setDiscount(0);
+    }
+  };
+
+  // Remove coupon function
+  const removeCoupon = () => {
+    setAppliedCoupon("");
+    setDiscount(0);
+    setCouponMessage("");
+    setCouponCode("");
+  };
+
+  // Calculate prices
+  const originalPrice = product[0]?.price || 0;
+  const discountAmount = originalPrice * discount;
+  const finalPrice = originalPrice - discountAmount;
 
   const socialMediaFeatures = [
     [
@@ -55,9 +107,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
   let id: number = 0;
 
-
   const router = useRouter();
-
 
   if (params.id === "cma3zclf8igzf07jxehynv8d3") {
     id = 2;
@@ -75,13 +125,12 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   });
 };
 
-
   const createPaypalOrder = (data: any, actions: any) => {
     return actions.order.create({
       purchase_units: [
         {
           amount: {
-            value: product[0]?.price.toString() || "0",
+            value: finalPrice.toFixed(2), // Use final price after discount
             currency_code: "USD",
           },
         },
@@ -149,7 +198,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                   CheckOut
                 </div>
                 <h1 className="text-2xl font-bold text-gray-800 mb-6">
-                  Details
+                  Payment
                 </h1>
                 <div className="paypal">
                   <PayPalScriptProvider
@@ -178,8 +227,51 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                   </h2>
                   <div className="lg:col-span-5">
                     <div className="space-y-6">
-                      {/* What You Get */}
+                      {/* Coupon Code Section */}
+                      <div className="space-y-3 border-b border-black/10 pb-4">
+                        <Label className="text-gray-900">Coupon Code</Label>
+                        <div className="flex gap-2">
+                          <Input
+                            type="text"
+                            value={couponCode}
+                            onChange={(e) => setCouponCode(e.target.value)}
+                            placeholder="Enter coupon code"
+                            className="flex-1 text-gray-900"
+                          />
+                          <button
+                            type="button"
+                            onClick={applyCoupon}
+                            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+                          >
+                            Apply
+                          </button>
+                        </div>
+                        
+                        {/* Coupon Message */}
+                        {couponMessage && (
+                          <p className={`text-sm ${couponMessage.includes("applied") ? "text-green-600" : "text-red-600"}`}>
+                            {couponMessage}
+                          </p>
+                        )}
+                        
+                        {/* Applied Coupon Display */}
+                        {appliedCoupon && (
+                          <div className="flex items-center justify-between bg-green-50 p-2 rounded-md">
+                            <span className="text-sm text-green-700">
+                              Coupon: {appliedCoupon} ({appliedCoupon === "10TOPS" ? "10%" : "15%"} off)
+                            </span>
+                            <button
+                              type="button"
+                              onClick={removeCoupon}
+                              className="text-xs text-red-600 hover:text-red-800"
+                            >
+                              Remove
+                            </button>
+                          </div>
+                        )}
+                      </div>
 
+                      {/* What You Get */}
                       <div className="space-y-4">
                         {/* Product preview */}
                         <div className="flex items-center gap-4 border-b border-black/10 pb-4">
@@ -193,38 +285,45 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                           </div>
                           <div className="text-right">
                             <p className="text-sm font-medium text-gray-900">
-                              ${product[0]?.price}
+                              ${originalPrice}
                             </p>
                           </div>
                         </div>
+                        
                         <div className="mt-6 space-y-2">
                           <div className="flex justify-between">
                             <span className="text-gray-500">Subtotal</span>
                             <span className="font-medium text-gray-900">
-                              ${product[0]?.price}
+                              ${originalPrice}
                             </span>
                           </div>
+                          
+                          {/* Show discount if applied */}
+                          {appliedCoupon && (
+                            <div className="flex justify-between">
+                              <span className="text-green-600">Discount ({appliedCoupon === "10TOPS" ? "10%" : "15%"} off)</span>
+                              <span className="font-medium text-green-600">
+                                -${discountAmount.toFixed(2)}
+                              </span>
+                            </div>
+                          )}
+                          
                           <div className="flex justify-between">
                             <span className="text-gray-500">Compare Price</span>
                             <span className="font-medium text-red-400 line-through">
                               ${product[0]?.compareAtPrice}
                             </span>
                           </div>
+                          
                           <div className="flex justify-between border-t border-black/10 pt-2 mt-2">
                             <span className="font-medium text-gray-900">
                               Total
                             </span>
                             <span className="font-bold text-gray-900">
-                              ${product[0]?.price}
+                              ${finalPrice.toFixed(2)}
                             </span>
                           </div>
                         </div>
-
-                        {/* <div className="flex justify-start gap-3 mt-4">
-                      <Button>
-                        <Link href={"/admin/products"}>Buy Now</Link>
-                      </Button>
-                    </div> */}
 
                         <div className="mt-4 flex items-center justify-center gap-2 text-sm text-gray-500">
                           <Lock className="h-4 w-4" />
